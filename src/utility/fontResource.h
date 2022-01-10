@@ -15,7 +15,7 @@ typedef struct Ink_eSPI_font
         _height = height;
         _fontptr = ptr;
 
-        _fontSize = _width * _height / 8;
+        _fontSize = (_width<8)?_height:_width * _height / 8;
     }
 }Ink_eSPI_font_t;
 

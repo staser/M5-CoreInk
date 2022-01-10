@@ -116,14 +116,16 @@ void Ink_Sprite::drawChar(uint16_t posX, uint16_t posY, char charData, Ink_eSPI_
 {
     if( !isCreat ) return;
 
+    const uint8_t bits = (fontPtr->_width<8)?fontPtr->_width:8;
+
     charData -= 0x20;
 
     for (int y = 0; y < fontPtr->_height; y++)
     {
         for (int x = 0; x < fontPtr->_width; x++)
         {
-            uint8_t mark = 0x80 >> (y * fontPtr->_width + x) % 8;
-            if ((fontPtr->_fontptr[charData * fontPtr->_fontSize + (y * fontPtr->_width + x) / 8]) & mark)
+            uint8_t mark = 0x80 >> (y * fontPtr->_width + x) % bits;
+            if ((fontPtr->_fontptr[charData * fontPtr->_fontSize + (y * fontPtr->_width + x) / bits]) & mark)
             {
                 drawPix(x + posX, y + posY, 0);
             }
